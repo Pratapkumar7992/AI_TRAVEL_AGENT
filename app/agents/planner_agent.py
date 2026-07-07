@@ -1,6 +1,6 @@
-from app.llm.gemini import llm
-from app.prompts.planner_prompt import planner_prompt
-from app.schemas.travel_request import TravelRequest
+from llm.gemini import llm
+from prompts.planner_prompt import planner_prompt
+from schemas.travel_request import TravelRequest
 
 
 class PlannerAgent:

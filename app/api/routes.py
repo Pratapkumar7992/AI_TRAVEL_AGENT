@@ -2,6 +2,10 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 
 from services.llm_service import LLMService
+from agents.planner_agent import PlannerAgent
+
+planner = PlannerAgent()
+
 
 router = APIRouter()
 
@@ -26,3 +30,8 @@ def chat(request: PromptRequest):
     return {
         "response": response
     }
+    
+@router.post("/planner")
+def planner_route(request: PromptRequest):
+    result = planner.extract(request.query)
+    return result
