@@ -3,6 +3,7 @@ from pydantic import BaseModel
 
 from services.llm_service import LLMService
 from agents.planner_agent import PlannerAgent
+from graph.travel_graph import travel_graph
 
 planner = PlannerAgent()
 
@@ -34,4 +35,15 @@ def chat(request: PromptRequest):
 @router.post("/planner")
 def planner_route(request: PromptRequest):
     result = planner.extract(request.query)
+    return result
+
+@router.post("/planner-graph")
+def planner_graph_route(request: PromptRequest):
+
+    initial_state = {
+        "query": request.query
+    }
+
+    result = travel_graph.invoke(initial_state)
+
     return result
