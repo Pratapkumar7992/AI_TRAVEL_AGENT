@@ -1,9 +1,11 @@
 from agents.planner_agent import PlannerAgent
 from agents.flight_agent import FlightAgent
+from agents.train_agent import TrainAgent
 from graph.state import TravelState
 
 planner_agent = PlannerAgent()
 flight_agent = FlightAgent()
+train_agent = TrainAgent()
 
 def planner_node(state: TravelState) -> TravelState:
 
@@ -37,3 +39,12 @@ def flight_node(state: TravelState) -> TravelState:
         **state,
         "flights": flights
     }
+    
+def train_node(state: TravelState) -> TravelState:
+    
+    print("Train Node Started")
+    trains=train_agent.search(
+        source=state["source"],
+        destination=state["destination"],
+        travel_date=state.get("travel_date")
+    )
